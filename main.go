@@ -15,9 +15,10 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "<h1>Contact me</h1>")
 }
 
-func notFounError(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "<h1>Error</h1>")
-}
+//either this code can be implimented as else handler function
+// func notFounError(w http.ResponseWriter, r *http.Request) {
+// 	fmt.Fprint(w, "<h1>Error</h1>")
+// }
 
 func urlHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/" {
@@ -25,7 +26,9 @@ func urlHandler(w http.ResponseWriter, r *http.Request) {
 	} else if r.URL.Path == "/contact" {
 		contactHandler(w, r)
 	} else {
-		notFounError(w, r)
+		// 	w.WriteHeader(http.StatusNotFound) //manually set the header and message
+		// 	fmt.Fprintf(w, "Page not found")
+		http.Error(w, "404 Not Found", http.StatusNotFound) //use the default http.Error of go
 	}
 }
 
