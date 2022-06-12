@@ -33,8 +33,8 @@ func urlHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/", urlHandler)
-	http.HandleFunc("/contact", contactHandler)
-	fmt.Println("Listening on server :3000")
-	http.ListenAndServe(":3000", nil)
+	// http.HandleFunc("/", urlHandler) // this has been removed ad the path handler can be directly cast to listen and serrve
+	// http.HandleFunc("/contact", contactHandler)
+	fmt.Println("Listening on server :7000")
+	http.ListenAndServe(":7000", http.HandlerFunc(urlHandler))
 }
